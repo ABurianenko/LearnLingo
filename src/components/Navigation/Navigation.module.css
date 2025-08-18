@@ -1,0 +1,11 @@
+.navigation {
+    display: flex;
+    gap:28px;
+    margin-right: 268px;
+}
+
+.navigation_link {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+}

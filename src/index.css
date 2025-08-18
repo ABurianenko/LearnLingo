@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px 64px 32px 64px;
+  background-color: #fff;
+
+  font-family: Roboto, sans-serif;
+  color: #121417;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+[data-theme='yellow'] {
+  --main-color: #F4C550;
+  --bg-color: #FBE9BA;
+  --laptop-color-1: #EEB055;
+  --laptop-color-2: #D08F38;
+  --apple-color: #E7C885;
+}
+
+[data-theme='green'] {
+  --main-color: #9FBAAE;
+  --bg-color: #CBDED3;
+  --laptop-color-1: #295761;
+  --laptop-color-2: #183E49;
+  --apple-color: #9EB9AD;
+}
+
+[data-theme='blue'] {
+  --main-color: #9FB7CE;
+  --bg-color: #BFD6EA;
+  --laptop-color-1: #314B6E;
+  --laptop-color-2: #1F385A;
+  --apple-color: #9FB6CD;
+}
+
+[data-theme='red'] {
+  --main-color: #E0A39A;
+  --bg-color: #F2C0BD;
+  --laptop-color-1: #B03F3E;
+  --laptop-color-2: #982A27;
+  --apple-color: #DFA299;
+}
+
+[data-theme='orange'] {
+  --main-color: #F0AA8D;
+  --bg-color: #F4C8BA;
+  --laptop-color-1: #E17650;
+  --laptop-color-2: #CA5B38;
+  --apple-color: #EFA98C;
+}

@@ -1,0 +1,31 @@
+.auth_nav {
+    display: flex;
+    gap: 14px;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}
+
+.auth_nav_login {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.auth_nav_login_icon {
+    fill: var(--main-color);
+}
+
+.auth_nav_register {
+    display: flex;
+    padding: 14px 39px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+    background: #121417;
+
+    color: #fff;
+}

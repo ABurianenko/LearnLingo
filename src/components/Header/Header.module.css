@@ -1,0 +1,32 @@
+header {
+    display: flex;
+    margin: 0 64px 20px 64px;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-right: 390px;
+}
+
+.logo_img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom,
+        #338AF3 0%,
+        #338AF3 50%,
+        #FFDA44 50%,
+        #FFDA44 100%);
+}
+
+.logo_name {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+}
