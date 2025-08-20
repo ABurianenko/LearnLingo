@@ -1,13 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { initTheme } from "./operations";
-import { STORAGE_KEY } from "../../constants/constants";
-
-const getInitialTheme = () => {
-    return localStorage.getItem(STORAGE_KEY);
-}
+import { pickRandomTheme } from "../../constants/constants";
 
 const initialState = {
-    mode: getInitialTheme || 'yellow',
+    current: pickRandomTheme(),
 }
 
 const themeSlice = createSlice({
@@ -17,12 +12,6 @@ const themeSlice = createSlice({
         setTheme: (state, action) => {
             state.mode = action.payload;
         }
-    },
-    extraReducers: builder => {
-        builder
-            .addCase(initTheme.fulfilled, (state, action) => {
-                state.mode = action.payload;
-        })
     }
 });
 

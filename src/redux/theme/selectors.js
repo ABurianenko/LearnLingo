@@ -1,1 +1,1 @@
-export const themeSelect = (state) => state.theme.mode;
+export const themeSelect = (state) => state.theme.current;

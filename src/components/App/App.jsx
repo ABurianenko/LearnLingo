@@ -7,7 +7,6 @@ import { selectIsRefreshing } from "../../redux/auth/selectors"
 import { useEffect } from "react"
 import { refreshUser } from "../../redux/auth/operations"
 import { themeSelect } from "../../redux/theme/selectors"
-import { initTheme } from "../../redux/theme/operations"
 
 function App() {
   const dispatch = useDispatch();
@@ -19,13 +18,10 @@ function App() {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(initTheme())
-  })
-
-  useEffect(() => {
-    if (!theme) return;
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+    if (theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  }, [theme]);
 
   if (isRefreshing) return <p>Loading...</p>;
   
