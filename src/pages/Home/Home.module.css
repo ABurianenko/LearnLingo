@@ -32,8 +32,9 @@
     margin-bottom: 32px;
 }
 
-.hero_title>span {
-    background-color: var(--bg-color)
+.hero_title>em {
+    background-color: var(--bg-color);
+    border-radius: 8px;
 }
 
 .hero_text {
@@ -103,10 +104,8 @@
 
     padding: 40px 122px;
 
-    background-image: repeating-linear-gradient(90deg, var(--main-color), var(--main-color) 12px, transparent 12px, transparent 16px), repeating-linear-gradient(180deg, var(--main-color), var(--main-color) 12px, transparent 12px, transparent 16px), repeating-linear-gradient(90deg, var(--main-color), var(--main-color) 12px, transparent 12px, transparent 16px), repeating-linear-gradient(180deg, var(--main-color), var(--main-color) 12px, transparent 12px, transparent 16px);
-    background-position: left top, right top, left bottom, left top;
-    background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
-    background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
+    border-radius: 30px;
+    background: var(--dashed-border-img);
 }
 
 .statistics_list {

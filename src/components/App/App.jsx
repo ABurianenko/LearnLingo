@@ -7,6 +7,7 @@ import { selectIsRefreshing } from "../../redux/auth/selectors"
 import { useEffect } from "react"
 import { refreshUser } from "../../redux/auth/operations"
 import { themeSelect } from "../../redux/theme/selectors"
+import { AuthModal } from "../Auth/AuthModal"
 
 function App() {
   const dispatch = useDispatch();
@@ -34,15 +35,15 @@ function App() {
           <Route path="/" element={<Home />} />
           
           
-          {/* <Route path="/teachers" element={<Teachers />} />
-          <Route path="/favourites" element={
+          {/* <Route path="/teachers" element={<Teachers />} /> */}
+          {/* <Route path="/favourites" element={
             <PrivateRoute redirectTo='/login' component={<Favourites />} />
-          } />
+          } /> */}
 
-          <Route path="/register" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<AuthModal />} />
+          <Route path="/login" element={<AuthModal />} />
 
-          <Route path="*" element={<Home />} /> */}
+          <Route path="*" element={<Home />} />
 
         </Routes>
 

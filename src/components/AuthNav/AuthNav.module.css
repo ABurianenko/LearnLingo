@@ -15,7 +15,8 @@
 }
 
 .auth_nav_login_icon {
-    fill: var(--main-color);
+    stroke: var(--main-color);
+    stroke-width: 2px;
 }
 
 .auth_nav_register {

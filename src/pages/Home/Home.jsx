@@ -7,7 +7,7 @@ export const Home = () => {
         <main className={s.home}>
             <div className={s.hero_container}>
                 <h1 className={s.hero_title}>
-                    Unlock your potential with the best <span>language</span> tutors
+                    Unlock your potential with the best <em> language</em> tutors
                 </h1>
                 <p className={s.hero_text}>
                     Embark on an Exciting Language Journey with Expert Language Tutors: Elevate your language proficiency to new heights by connecting with highly qualified and experienced tutors.

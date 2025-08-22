@@ -39,6 +39,8 @@ a {
   --laptop-color-1: #EEB055;
   --laptop-color-2: #D08F38;
   --apple-color: #E7C885;
+
+  --dashed-border-img: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='30' ry='30' stroke='%23F4C550FF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 [data-theme='green'] {
@@ -47,6 +49,8 @@ a {
   --laptop-color-1: #295761;
   --laptop-color-2: #183E49;
   --apple-color: #9EB9AD;
+
+  --dashed-border-img: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='30' ry='30' stroke='%239FBAAEFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 [data-theme='blue'] {
@@ -55,6 +59,8 @@ a {
   --laptop-color-1: #314B6E;
   --laptop-color-2: #1F385A;
   --apple-color: #9FB6CD;
+
+  --dashed-border-img: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='30' ry='30' stroke='%239FB7CEFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 [data-theme='red'] {
@@ -63,6 +69,8 @@ a {
   --laptop-color-1: #B03F3E;
   --laptop-color-2: #982A27;
   --apple-color: #DFA299;
+
+  --dashed-border-img: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='30' ry='30' stroke='%23E0A39AFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 [data-theme='orange'] {
@@ -71,4 +79,6 @@ a {
   --laptop-color-1: #E17650;
   --laptop-color-2: #CA5B38;
   --apple-color: #EFA98C;
+
+  --dashed-border-img: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='30' ry='30' stroke='%23F0AA8DFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
