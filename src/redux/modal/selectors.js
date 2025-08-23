@@ -1,1 +1,1 @@
-export const selectAuthModal = (state) => state.modal.modalSlice;
+export const selectAuthModal = (state) => state.modal.authModal;

@@ -4,8 +4,11 @@ import * as Yup from 'yup';
 import { useForm } from "react-hook-form";
 import { IoMdClose } from "react-icons/io";
 import { selectAuthModal } from "../../redux/modal/selectors";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { closeModal } from "../../redux/modal/slice";
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import s from './AuthModal.module.css';
 
 const validationRegisterSchema = Yup.object().shape({
     name: Yup.string()
@@ -49,23 +52,24 @@ export function AuthModal() {
         formState: { errors, isSubmitting },
         reset,
     } = useForm({ resolver: yupResolver(schema), mode: 'onTouched' });
+
     
-    if (!mode) return null;
+    const onClose = useCallback(() => {
+        reset();
+        dispatch(closeModal());
+    }, [dispatch, reset])
+        ;
 
     useEffect(() => {
+        if (!mode) return;
+        
         previouslyFocused.current = document.activeElement;
-        document.body.style.overflow = ' hidden';
-        setTimeout(() => dialogRef.current.querySelector('input').focus(), 0);
-        return () => {
-            document.body.style.overflow = '';
-            previouslyFocused.current && previouslyFocused.current.focus();
-        }
-    }, [])
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => dialogRef.current?.querySelector('input').focus(), 0);
 
-    useEffect(() => {
         const onKeyDown = (e) => {
             if (e.key === 'Escape') {
-                onclose();
+                onClose();
             }
             if (e.key === 'Tab') {
                 const focusedEl = dialogRef.current.querySelectorAll(
@@ -83,13 +87,18 @@ export function AuthModal() {
             }
         };
         document.addEventListener('keydown', onKeyDown);
-        return () => document.removeEventListener('keydown', onKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', onKeyDown);
+            document.body.style.overflow = '';
+            previouslyFocused.current.focus();
+        };
+    }, [mode, onClose])
+
+    useEffect(() => {
+        
     }, []);
 
-    const onClose = () => {
-        reset();
-        dispatch(closeModal());
-    };
 
     const onBackdrop = (e) => {
         if (e.target === e.currentTarget) onClose();
@@ -108,30 +117,48 @@ export function AuthModal() {
         }
     }
 
+    console.log(mode);
 
     return (
-        <div>
-            <IoMdClose />
-            <h2>
-                {mode === 'register' ? 'Registration' : 'Log In'}
-            </h2>
-            <p>
-                {mode === 'register' ?
-                    'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information' :
-                    'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.'}
-            </p>
-            <form
-                onSubmit={handleSubmit(onSubmit)}
+        <div
+            className={s.backdrop}
+            onClick={onBackdrop}
+            aria-hidden="true"
+        >
+            <div
+                className={s.modal}
+                ref={dialogRef}
+                aria-modal="true"
             >
-                {mode === 'register' && (
-                    <input defaultValue="Name" {...register("name")} />
-                )}
-                <input defaultValue="Email" {...register("email")} />
-                <input defaultValue="Password" {...register("password")} /> 
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
-                </button>
-            </form>
+                <IoMdClose onClick={onClose} />
+                <h2>
+                    {mode === 'register' ? 'Registration' : 'Log In'}
+                </h2>
+                <p>
+                    {mode === 'register' ?
+                        'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information' :
+                        'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.'}
+                </p>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    {mode === 'register' && (
+                        <>
+                            <input placeholder="Name" {...register("name")} aria-invalid={!!errors.name} />
+                            {errors.name && <p className="err">{errors.name.message}</p>}
+                        </>
+                        
+                    )}
+                    <input placeholder="Email" {...register("email")} aria-invalid={!!errors.name} />
+                    {errors.name && <p className="err">{errors.email.message}</p>}
+                    <input placeholder="Password" {...register("password")} aria-invalid={!!errors.name} />
+                    {errors.name && <p className="err">{errors.password.message}</p>}
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
+                    </button>
+                </form>
+            </div>
         </div>
+        
     )
 }
