@@ -4,9 +4,9 @@
   padding: 0;
 }
 
-body {
+#root {
   width: 1440px;
-  min-height: 100vh;
+  max-height: 100vh;
   margin: 0 auto;
   padding: 20px 64px 32px 64px;
   background-color: #fff;

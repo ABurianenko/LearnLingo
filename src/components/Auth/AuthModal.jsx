@@ -49,7 +49,7 @@ export function AuthModal() {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { isSubmitting },
         reset,
     } = useForm({ resolver: yupResolver(schema), mode: 'onTouched' });
 
@@ -57,8 +57,7 @@ export function AuthModal() {
     const onClose = useCallback(() => {
         reset();
         dispatch(closeModal());
-    }, [dispatch, reset])
-        ;
+    }, [dispatch, reset]);
 
     useEffect(() => {
         if (!mode) return;
@@ -95,11 +94,6 @@ export function AuthModal() {
         };
     }, [mode, onClose])
 
-    useEffect(() => {
-        
-    }, []);
-
-
     const onBackdrop = (e) => {
         if (e.target === e.currentTarget) onClose();
     };
@@ -117,43 +111,38 @@ export function AuthModal() {
         }
     }
 
-    console.log(mode);
-
     return (
         <div
             className={s.backdrop}
             onClick={onBackdrop}
-            aria-hidden="true"
         >
             <div
                 className={s.modal}
                 ref={dialogRef}
                 aria-modal="true"
             >
-                <IoMdClose onClick={onClose} />
-                <h2>
+                <IoMdClose className={s.closeBtn} onClick={onClose} />
+                <h2 className={s.modal_title}>
                     {mode === 'register' ? 'Registration' : 'Log In'}
                 </h2>
-                <p>
+                <p className={s.modal_text}>
                     {mode === 'register' ?
                         'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information' :
                         'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.'}
                 </p>
                 <form
+                    className={s.modal_form}
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {mode === 'register' && (
-                        <>
-                            <input placeholder="Name" {...register("name")} aria-invalid={!!errors.name} />
-                            {errors.name && <p className="err">{errors.name.message}</p>}
-                        </>
-                        
+                        <input className={s.modal_form_input} placeholder="Name" {...register("name")} />
                     )}
-                    <input placeholder="Email" {...register("email")} aria-invalid={!!errors.name} />
-                    {errors.name && <p className="err">{errors.email.message}</p>}
-                    <input placeholder="Password" {...register("password")} aria-invalid={!!errors.name} />
-                    {errors.name && <p className="err">{errors.password.message}</p>}
-                    <button type="submit" disabled={isSubmitting}>
+                    <input className={s.modal_form_input} placeholder="Email" {...register("email")} />
+                    <input className={s.modal_form_input} placeholder="Password" {...register("password")} />
+                    <button
+                        className={s.modal_form_btn}
+                        type="submit"
+                        disabled={isSubmitting}>
                         {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
                     </button>
                 </form>
