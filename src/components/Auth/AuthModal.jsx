@@ -9,6 +9,7 @@ import { closeModal } from "../../redux/modal/slice";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import s from './AuthModal.module.css';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const validationRegisterSchema = Yup.object().shape({
     name: Yup.string()
@@ -29,10 +30,6 @@ const validationLoginSchema = Yup.object().shape({
         .email('Must be a valid email')
         .required('Email is required'),
     password: Yup.string()
-        .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
-            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-        )
         .required('Password is required'),
 });
 
@@ -49,15 +46,26 @@ export function AuthModal() {
     const {
         register,
         handleSubmit,
-        formState: { isSubmitting },
+        formState: { errors, isSubmitting },
         reset,
     } = useForm({ resolver: yupResolver(schema), mode: 'onTouched' });
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const goBackRef = useRef(location.state?.from || "/");
     
     const onClose = useCallback(() => {
         reset();
         dispatch(closeModal());
-    }, [dispatch, reset]);
+
+        const params = new URLSearchParams(location.search);
+        if (params.has('auth')) {
+            params.delete('auth');
+            navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
+        } else {
+            navigate(goBackRef.current, { replace: true });
+        }
+    }, [dispatch, reset, location.pathname, location.search, navigate]);
 
     useEffect(() => {
         if (!mode) return;
@@ -75,7 +83,7 @@ export function AuthModal() {
                     'button, input'
                 );
                 const first = focusedEl[0];
-                const last = focusedEl[focusedEl - 1];
+                const last = focusedEl[focusedEl.length - 1];
                 if (!e.shiftKey && document.activeElement === last) {
                     e.preventDefault();
                     first.focus();
@@ -93,6 +101,8 @@ export function AuthModal() {
             previouslyFocused.current.focus();
         };
     }, [mode, onClose])
+
+    if (!mode) return null;
 
     const onBackdrop = (e) => {
         if (e.target === e.currentTarget) onClose();
@@ -121,7 +131,10 @@ export function AuthModal() {
                 ref={dialogRef}
                 aria-modal="true"
             >
-                <IoMdClose className={s.closeBtn} onClick={onClose} />
+                <button onClick={onClose} >
+                    <IoMdClose className={s.closeBtn} />
+                </button>
+                
                 <h2 className={s.modal_title}>
                     {mode === 'register' ? 'Registration' : 'Log In'}
                 </h2>
@@ -135,14 +148,27 @@ export function AuthModal() {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {mode === 'register' && (
-                        <input className={s.modal_form_input} placeholder="Name" {...register("name")} />
+                        <>
+                            <input
+                                className={s.modal_form_input}
+                                type="text"
+                                placeholder="Name"
+                                aria-invalid={!!errors.email}
+                                {...register("name")}
+                            />
+                            {errors.name && <p className={s.err}>{errors.name.message}</p>}
+                        </>
+                        
                     )}
-                    <input className={s.modal_form_input} placeholder="Email" {...register("email")} />
-                    <input className={s.modal_form_input} placeholder="Password" {...register("password")} />
+                    <input className={s.modal_form_input} type="email" placeholder="Email" {...register("email")} />
+                    {errors.email && <p className={s.err}>{errors.email.message}</p>}
+                    <input className={s.modal_form_input} type="password" placeholder="Password" {...register("password")} />
+                    {errors.password && <p className="err">{errors.password.message}</p>}
                     <button
                         className={s.modal_form_btn}
                         type="submit"
-                        disabled={isSubmitting}>
+                        disabled={isSubmitting}
+                    >
                         {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
                     </button>
                 </form>
