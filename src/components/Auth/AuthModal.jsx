@@ -116,6 +116,7 @@ export function AuthModal() {
                 await dispatch(registerUser({ name: data.name, email: data.email, password: data.password })).unwrap();
             }
             onClose();
+            
         } catch (error) {
             console.error(error);
         }

@@ -14,7 +14,8 @@
     align-items: center;
 }
 
-.auth_nav_login_icon {
+.auth_nav_login_icon,
+.auth_nav_logout_icon {
     stroke: var(--main-color);
     stroke-width: 2px;
 }
@@ -29,4 +30,19 @@
     background: #121417;
 
     color: #fff;
+}
+
+.auth_nav_user_icon {
+    fill: var(--main-color);
+    width: 24px;
+    height: 24px;
+}
+
+.auth_nav_logout {
+    border: none;
+    background-color: transparent;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
