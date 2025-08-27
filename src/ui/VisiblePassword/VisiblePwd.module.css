@@ -1,0 +1,11 @@
+.eye {
+    border: none;
+    background-color: transparent;
+}
+
+.eye>svg {
+    width: 16px;
+    height: 16px;
+
+    fill: var(--main-color);
+}

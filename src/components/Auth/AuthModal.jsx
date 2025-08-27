@@ -4,12 +4,13 @@ import * as Yup from 'yup';
 import { useForm } from "react-hook-form";
 import { IoMdClose } from "react-icons/io";
 import { selectAuthModal } from "../../redux/modal/selectors";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { closeModal } from "../../redux/modal/slice";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import s from './AuthModal.module.css';
 import { useLocation, useNavigate } from "react-router-dom";
+import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 const validationRegisterSchema = Yup.object().shape({
     name: Yup.string()
@@ -20,7 +21,7 @@ const validationRegisterSchema = Yup.object().shape({
     password: Yup.string()
         .matches(
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
-            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+            "Password must contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
         )
         .required('Password is required'),
 });
@@ -40,6 +41,8 @@ export function AuthModal() {
 
     const dialogRef = useRef(null);
     const previouslyFocused = useRef(null);
+
+    const [showPwd, setShowPwd] = useState(false);
 
     const schema = useMemo(() => (mode === 'register' ? validationRegisterSchema : validationLoginSchema), [mode]);
 
@@ -163,8 +166,14 @@ export function AuthModal() {
                     )}
                     <input className={s.modal_form_input} type="email" placeholder="Email" {...register("email")} />
                     {errors.email && <p className={s.err}>{errors.email.message}</p>}
-                    <input className={s.modal_form_input} type="password" placeholder="Password" {...register("password")} />
-                    {errors.password && <p className="err">{errors.password.message}</p>}
+                    <div className={s.modal_form_input_wrap}>
+                        <input className={s.modal_form_input} type={showPwd ? "text" : "password"} placeholder="Password" {...register("password")} />
+                        <div className={s.modal_form_toggle}>
+                            <VisiblePassword visible={showPwd} onToggle={() => setShowPwd(v => !v)} />
+                        </div>
+                    </div>
+                    
+                    {errors.password && <p className={s.err}>{errors.password.message}</p>}
                     <button
                         className={s.modal_form_btn}
                         type="submit"

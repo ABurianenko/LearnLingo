@@ -55,7 +55,12 @@
     margin-bottom: 40px;
 }
 
+.modal_form_input_wrap {
+    position: relative;
+}
+
 .modal_form_input {
+    width: 100%;
     padding: 16px 18px;
     border-radius: 12px;
     border: 1px solid rgba(18, 20, 23, 0.10);
@@ -81,4 +86,15 @@
     font-style: normal;
     font-weight: 700;
     line-height: 1.56;
+}
+
+.err {
+    color: red;
+    font-size: 12px;
+}
+
+.modal_form_toggle {
+    position: absolute;
+    bottom: 17px;
+    right: 18px;
 }
