@@ -32,10 +32,20 @@
     color: #fff;
 }
 
+.auth_nav_user {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .auth_nav_user_icon {
     fill: var(--main-color);
     width: 24px;
     height: 24px;
+}
+
+.auth_nav_user_name {
+    font-weight: 500;
 }
 
 .auth_nav_logout {
@@ -45,4 +55,6 @@
     display: flex;
     gap: 8px;
     align-items: center;
+
+    font-size: 16px;
 }

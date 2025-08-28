@@ -51,15 +51,15 @@ export const AuthNav = () => {
     }
 
     const loggedIn = useSelector(selectIsLoggedIn);
-    const user = useSelector(selectUser);
+    const user = useSelector(selectUser);    
 
     return (
         <div>
             {loggedIn ? (
                 <div className={s.auth_nav}>
-                    <div>
+                    <div className={s.auth_nav_user}>
                         <FaCircleUser className={s.auth_nav_user_icon} />
-                        <p>{user.displayName}</p>
+                        <p className={s.auth_nav_user_name}>{user.displayName}</p>
                     </div>
                     <button className={s.auth_nav_logout} onClick={() => {dispatch(logoutUser())}}>
                         <FiLogOut className={s.auth_nav_logout_icon} />

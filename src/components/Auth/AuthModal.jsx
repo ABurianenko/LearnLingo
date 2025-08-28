@@ -1,16 +1,20 @@
 import { useDispatch, useSelector } from "react-redux"
-import { loginUser, registerUser } from "../../redux/auth/operations";
-import * as Yup from 'yup';
-import { useForm } from "react-hook-form";
-import { IoMdClose } from "react-icons/io";
-import { selectAuthModal } from "../../redux/modal/selectors";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { closeModal } from "../../redux/modal/slice";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+
+import { IoMdClose } from "react-icons/io";
+
+import { loginUser, registerUser } from "../../redux/auth/operations";
+import { selectAuthModal } from "../../redux/modal/selectors";
+import { closeModal } from "../../redux/modal/slice";
+import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 import s from './AuthModal.module.css';
-import { useLocation, useNavigate } from "react-router-dom";
-import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 const validationRegisterSchema = Yup.object().shape({
     name: Yup.string()
@@ -116,12 +120,14 @@ export function AuthModal() {
             if (mode === 'login') {
                 await dispatch(loginUser({ email: data.email, password: data.password })).unwrap();
             } else {
-                await dispatch(registerUser({ name: data.name, email: data.email, password: data.password })).unwrap();
+                await dispatch(registerUser({ displayName: data.name, email: data.email, password: data.password })).unwrap();
+                toast("Your account has been successfully created")
             }
             onClose();
             
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.error(err);
+            toast("Email or password is not valid")
         }
     }
 
@@ -130,6 +136,7 @@ export function AuthModal() {
             className={s.backdrop}
             onClick={onBackdrop}
         >
+            
             <div
                 className={s.modal}
                 ref={dialogRef}
@@ -147,6 +154,8 @@ export function AuthModal() {
                         'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information' :
                         'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.'}
                 </p>
+
+                <Toaster />
                 <form
                     className={s.modal_form}
                     onSubmit={handleSubmit(onSubmit)}
@@ -157,7 +166,7 @@ export function AuthModal() {
                                 className={s.modal_form_input}
                                 type="text"
                                 placeholder="Name"
-                                aria-invalid={!!errors.email}
+                                aria-invalid={!!errors.name}
                                 {...register("name")}
                             />
                             {errors.name && <p className={s.err}>{errors.name.message}</p>}

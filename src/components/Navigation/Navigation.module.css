@@ -1,7 +1,6 @@
 .navigation {
     display: flex;
     gap:28px;
-    margin-right: 268px;
 }
 
 .navigation_link {
