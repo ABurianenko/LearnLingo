@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import { refreshUser } from "../../redux/auth/operations"
 import { themeSelect } from "../../redux/theme/selectors"
 import { AuthModal } from "../Auth/AuthModal"
+import { Teachers } from "../../pages/Teachers/Teachers"
 
 function App() {
   const dispatch = useDispatch();
@@ -33,11 +34,10 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Home />} />
-          
-          
-          {/* <Route path="/teachers" element={<Teachers />} /> */}
-          {/* <Route path="/favourites" element={
-            <PrivateRoute redirectTo='/login' component={<Favourites />} />
+                    
+          <Route path="/teachers" element={<Teachers />} />
+          {/* <Route path="/favorites" element={
+            <PrivateRoute redirectTo='/login' component={<Favorites />} />
           } /> */}
 
           <Route path="/register" element={<AuthModal />} />

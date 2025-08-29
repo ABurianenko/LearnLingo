@@ -15,10 +15,10 @@ export const Navigation = () => {
             <NavLink className={s.navigation_link} to="/teachers">
                 Teachers
             </NavLink>
-            {loggedIn ?
-                <NavLink className={s.navigation_link} to="/favourites">
-                    Favourites
-                </NavLink> : null
+            {loggedIn &&
+                <NavLink className={s.navigation_link} to="/favorites">
+                    Favorites
+                </NavLink>
             }
         </nav>
     )

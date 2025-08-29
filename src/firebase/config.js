@@ -9,7 +9,8 @@ const firebaseConfig = {
     storageBucket: "learnlingo-8e67d.firebasestorage.app",
     messagingSenderId: "1006830642961",
     appId: "1:1006830642961:web:dc5ec4ddbf9419819e4eb0",
-    measurementId: "G-VEK1PFLP5K"
+    measurementId: "G-VEK1PFLP5K",
+    databaseURL: "https://learnlingo-8e67d-default-rtdb.firebaseio.com",
 };
   
 const app = initializeApp(firebaseConfig);
