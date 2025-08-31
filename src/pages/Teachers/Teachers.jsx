@@ -6,7 +6,7 @@ import { TeacherList } from "../../components/TeacherList/TeacherList";
 
 export const Teachers = () => {
     const dispatch = useDispatch();
-    
+
     const isLoading = useSelector(TeachersIsLoading);
     const error = useSelector(TeachersError);
     const page = useSelector(SelectPages);
@@ -30,8 +30,13 @@ export const Teachers = () => {
         }
     }, [page])
 
+    useEffect(() => {
+        document.body.classList.add('container');
+        return () => document.body.classList.remove('container');
+    }, []);
+
     return (
-        <div>
+        <div className="container">
             {isLoading && <p>Loading...</p>}
             {error && <p>Failed to load teachers</p>}
             <div>
