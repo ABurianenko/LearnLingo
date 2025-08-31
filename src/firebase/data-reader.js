@@ -1,9 +1,19 @@
 import { ref, get } from "firebase/database";
 import { database } from "./config";
 
-export async function fetchTeachersOnce() {
+export async function fetchTeachersOnce(limit = 4, page = 1) {
   const snap = await get(ref(database, "teachers"));
-  if (!snap.exists()) return [];
-  const obj = snap.val(); 
-  return Object.entries(obj).map(([id, data]) => ({ id, ...data }));
+  if (!snap.exists()) return { items: [], page, totalPages: 1 };
+
+  const raw = snap.val();
+
+  const all = Array.isArray(raw)
+    ? raw.map((data, idx) => ({ id: String(idx), ...data }))
+    : Object.entries(raw).map(([id, data]) => ({ id, ...data }));
+
+  const totalPages = Math.max(1, Math.ceil(all.length / limit));
+  const start = (page - 1) * limit;
+  const end = start + limit;
+
+  return { items: all.slice(start, end), page, totalPages };
 }

@@ -4,7 +4,10 @@ import { fetchTeachers } from "./operations"
 const initialState = {
     items: [],
     isLoading: false,
-    error: null
+    error: null,
+    page: 1,
+    limit: 4,
+    totalPages: 1,
 }
 
 const teachersSlice = createSlice({
@@ -17,8 +20,16 @@ const teachersSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchTeachers.fulfilled, (state, action) => {
-                state.items = action.payload;
                 state.isLoading = false;
+
+                if (action.payload.page === 1) {
+                    state.items = action.payload.items;
+                } else {
+                    state.items = [...state.items, ...action.payload.items]
+                }
+                state.page = action.payload.page;
+                state.totalPages = action.payload.totalPages;
+
                 state.error = null;
             })
             .addCase(fetchTeachers.rejected, (state, action) => {
