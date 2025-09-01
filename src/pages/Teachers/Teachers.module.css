@@ -1,0 +1,12 @@
+.loadMore_btn {
+    padding: 16px 48px;
+    margin: 64px auto;
+    
+    border-radius: 12px;
+    background-color: var(--main-color);
+    border: none;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.56;
+}

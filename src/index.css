@@ -13,6 +13,7 @@
 
   font-family: Roboto, sans-serif;
   color: #121417;
+  line-height: 1.5;
 }
 
 img {
@@ -35,6 +36,7 @@ a {
 
 #root.container {
   background-color: #F8F8F8;
+  max-height: 100%;
 }
 
 [data-theme='yellow'] {

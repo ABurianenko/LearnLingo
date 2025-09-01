@@ -1,0 +1,204 @@
+.card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 48px;
+    align-items: start;
+
+    padding: 24px;
+    margin-bottom: 8px;
+    border-radius: 24px;
+
+    background-color: #fff;
+}
+
+.teacher_photo_container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+
+    padding: 12px;
+
+    border: 3px solid var(--bg-color);
+}
+
+.teacher_photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_header_list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card_header_list_item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    font-weight: 500;
+}
+
+.card_header_list_item + .card_header_list_item::before {
+    content: '|';
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.star {
+    fill: var(--main-color);
+    width: 16px;
+    height: 16px;
+}
+
+.card_title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 32px;
+}
+
+.languages_list,
+.lesson_info,
+.conditions_list {
+    display: flex;
+    align-items: center;
+}
+
+.conditions_list {
+    margin-bottom: 16px;
+}
+
+.span_text {
+    color: #8A8A89;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.language_item {
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+}
+
+.language_item + .language_item::before {
+    content: ', ';
+}
+
+.lesson_info_text,
+.conditions_item {
+    font-weight: 500;
+}
+
+.readMore_btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    margin-bottom: 32px;
+}
+
+.reviews_list {
+    margin-top: 32px;
+}
+
+.review_item {
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: 
+    "logo name"
+    "logo rating"
+    "comment comment";
+
+    margin-bottom: 32px;
+}
+
+.logo {
+    grid-area: logo;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px #8A8A89;
+}
+
+.reviewer_name {
+    grid-area: name;
+
+    color: #8A8A89;
+    font-weight: 500;
+}
+
+.rating {
+    grid-area: rating;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.comment {
+    grid-area: comment;
+
+    margin-top: 16px;
+
+    font-weight: 500;
+}
+
+.levels_list {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.level {
+    padding: 8px 12px;
+    text-align: center;
+
+    border-radius: 35px;
+    border: 1px solid rgba(18, 20, 23, 0.20);
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.booking_btn {
+    padding: 16px 48px;
+
+    border-radius: 12px;
+    background-color: var(--main-color);
+    border: none;
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.56;
+}
+
+.fav_btn {
+    width: 26px;
+    height: 26px;
+}

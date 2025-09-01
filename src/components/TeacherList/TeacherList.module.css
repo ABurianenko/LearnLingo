@@ -1,4 +1,8 @@
-/* .teacherList {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-} */
+.teacherList {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    margin-left: 64px;
+    margin-right: 64px;
+}
