@@ -8,3 +8,4 @@ export const pickRandomTheme = (exclude) => {
 };
 
 export const isTheme = (x) => typeof x === 'string' && THEMES.includes(x);
+

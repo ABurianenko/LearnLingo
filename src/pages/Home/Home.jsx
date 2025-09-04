@@ -17,7 +17,7 @@ export const Home = () => {
                 </NavLink>
             </div>
             <div className={s.image_container}>
-                <img className={s.image_img} src="/public/img/Student.png" alt="Happy student" />
+                <img className={s.image_img} src="/img/Student.png" alt="Happy student" />
                 <div className={s.image_laptop}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="47" height="57" viewBox="0 0 47 57" fill="none">
                         <path d="M35.0906 1.38512C35.0906 4.17511 34.0918 6.77995 32.1008 9.19086C29.6982 12.0572 26.7921 13.7134 23.6407 13.4521C23.6005 13.1175 23.5772 12.7652 23.5772 12.3949C23.5772 9.71678 24.7198 6.8504 26.7489 4.50688C27.7619 3.32027 29.0503 2.33375 30.6127 1.54671C32.1717 0.771334 33.6463 0.342483 35.0332 0.269165C35.0512 0.435053 35.0646 0.600941 35.0738 0.766419C35.0854 0.973266 35.0906 1.1797 35.0906 1.38512Z" fill="url(#paint0_linear_19910_14)"/>

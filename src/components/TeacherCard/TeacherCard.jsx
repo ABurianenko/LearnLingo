@@ -1,9 +1,9 @@
 import { IoBookOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
-import { FaHeart } from "react-icons/fa";
-
+import { FavoriteBtn } from "../../ui/Favorite/FavoriteBtn";
 import s from './TeacherCard.module.css'
+
 
 export const TeacherCard = ({ teacher }) => {
     const [showMore, setShowMore] = useState(false);
@@ -106,9 +106,7 @@ export const TeacherCard = ({ teacher }) => {
                 )}
                 
             </div>
-            <button className={s.fav_btn}>
-                <FaHeart />
-            </button>
+            <FavoriteBtn className={s.star} teacher={teacher}/>
         </div>
     )
 }

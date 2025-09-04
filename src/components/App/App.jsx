@@ -9,6 +9,7 @@ import { refreshUser } from "../../redux/auth/operations"
 import { themeSelect } from "../../redux/theme/selectors"
 import { AuthModal } from "../Auth/AuthModal"
 import { Teachers } from "../../pages/Teachers/Teachers"
+import { Favorites } from "../../pages/Favourites/Favourites"
 
 function App() {
   const dispatch = useDispatch();
@@ -36,9 +37,9 @@ function App() {
           <Route path="/" element={<Home />} />
                     
           <Route path="/teachers" element={<Teachers />} />
-          {/* <Route path="/favorites" element={
+          <Route path="/favorites" element={
             <PrivateRoute redirectTo='/login' component={<Favorites />} />
-          } /> */}
+          } />
 
           <Route path="/register" element={<AuthModal />} />
           <Route path="/login" element={<AuthModal />} />
