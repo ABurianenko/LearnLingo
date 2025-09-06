@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/slice";
 import { themeReducer } from "./theme/slice";
-import { themeAutoSwitchMiddleware } from "./theme/middleware";
 import { modalReducer } from "./modal/slice";
 import { teacherReducer } from "./teachers/slice";
 import { favoritesReducer } from "./favorites/slice";
+import { THEME_STORAGE_KEY } from "../constants/constants";
 
 export const store = configureStore({
     reducer: {
@@ -13,9 +13,17 @@ export const store = configureStore({
         modal: modalReducer,
         auth: authReducer,
         theme: themeReducer,
-    },
-    middleware: (getDefault) => getDefault().concat(themeAutoSwitchMiddleware)
+    }
 })
+
+let lastTheme;
+store.subscribe(() => {
+  const theme = store.getState().theme.current;
+  if (theme && theme !== lastTheme) {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    lastTheme = theme;
+  }
+});
 
 const LS_KEY = "ll-favorites-keys";
 store.subscribe(() => {

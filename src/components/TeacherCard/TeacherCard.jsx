@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import { FavoriteBtn } from "../../ui/Favorite/FavoriteBtn";
 import s from './TeacherCard.module.css'
+import { BookBtn } from "../../ui/BookBtn/BookBtn";
 
 
 export const TeacherCard = ({ teacher }) => {
@@ -99,14 +100,10 @@ export const TeacherCard = ({ teacher }) => {
                     ))}
                 </ul>
 
-                {showMore && (
-                    <button className={s.booking_btn}>
-                        Book trial lesson
-                    </button>
-                )}
+                {showMore && (<BookBtn className={s.booking_btn} teacher={teacher}/>)}
                 
             </div>
-            <FavoriteBtn className={s.star} teacher={teacher}/>
+            <FavoriteBtn className={s.fav_btn} teacher={teacher}/>
         </div>
     )
 }

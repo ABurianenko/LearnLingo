@@ -8,7 +8,7 @@ export const slugify = (s = "") =>
 export const hash = (s = "") => {
   let h = 5381;
   for (let i = 0; i < s.length; i++) h = (h * 33) ^ s.charCodeAt(i);
-  return (h >>> 0).toString(36); // компактно
+  return (h >>> 0).toString(36);
 };
 
 export const makeTeacherKey = (t = {}, idx) => {

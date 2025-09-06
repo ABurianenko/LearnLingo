@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeSelectIsFavTeacher } from "../../redux/favorites/selectors";
 import { toggleFavoriteByTeacher } from "../../redux/favorites/slice";
 
-export const FavoriteBtn = ({ teacher, className = "", onClick }) => {
+export const FavoriteBtn = ({ teacher, className, onClick }) => {
   const dispatch = useDispatch();
   const isFav = useSelector(makeSelectIsFavTeacher(teacher));
 

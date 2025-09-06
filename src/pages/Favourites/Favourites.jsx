@@ -4,6 +4,7 @@ import { selectFavoriteKeys } from "../../redux/favorites/selectors";
 import { SelectTeachers } from "../../redux/teachers/selectors";
 import { fetchTeachers } from "../../redux/teachers/operations";
 import { makeTeacherKey } from "../../utils/teacherKey";
+import { TeacherCard } from "../../components/TeacherCard/TeacherCard";
 
 export const Favorites = () => {
     const dispatch = useDispatch();

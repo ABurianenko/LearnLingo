@@ -201,4 +201,9 @@
 .fav_btn {
     width: 26px;
     height: 26px;
+
+    border: none;
+    background: none;
+
+    color: var(--main-color);
 }

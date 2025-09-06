@@ -10,6 +10,7 @@ import { themeSelect } from "../../redux/theme/selectors"
 import { AuthModal } from "../Auth/AuthModal"
 import { Teachers } from "../../pages/Teachers/Teachers"
 import { Favorites } from "../../pages/Favourites/Favourites"
+import { BookingForm } from "../Booking/BookingForm"
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ function App() {
           <Route path="*" element={<Home />} />
 
         </Routes>
-
+        <BookingForm/>
       </Layout>
     </div>
   )

@@ -1,0 +1,40 @@
+.teacher {
+    display: grid;
+    grid-template-columns: 44px auto;
+    grid-template-areas: 
+    "photo text"
+    "photo name";
+    gap: 4px 14px;
+}
+
+.teacher_photo {
+    grid-area: photo;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.teacher_txt {
+    grid-area: text;
+
+    color: #8A8A89;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.33;
+}
+
+.teacher_name {
+    grid-area: name;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.reason_title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.33;
+}

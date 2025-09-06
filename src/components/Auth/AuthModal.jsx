@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useCallback,  useMemo, useState } from "react";
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 
-import { IoMdClose } from "react-icons/io";
-
+import { ModalWrap } from "../../ui/ModalWrap/ModalWrap";
 import { loginUser, registerUser } from "../../redux/auth/operations";
 import { selectAuthModal } from "../../redux/modal/selectors";
 import { closeModal } from "../../redux/modal/slice";
 import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 import s from './AuthModal.module.css';
+
 
 const validationRegisterSchema = Yup.object().shape({
     name: Yup.string()
@@ -43,9 +42,8 @@ export function AuthModal() {
 
     const mode = useSelector(selectAuthModal);
 
-    const dialogRef = useRef(null);
-    const previouslyFocused = useRef(null);
-
+    const isOpen = !!mode;
+    
     const [showPwd, setShowPwd] = useState(false);
 
     const schema = useMemo(() => (mode === 'register' ? validationRegisterSchema : validationLoginSchema), [mode]);
@@ -57,63 +55,12 @@ export function AuthModal() {
         reset,
     } = useForm({ resolver: yupResolver(schema), mode: 'onTouched' });
 
-    const location = useLocation();
-    const navigate = useNavigate();
-    const goBackRef = useRef(location.state?.from || "/");
-    
-    const onClose = useCallback(() => {
+    const baseClose = useCallback(() => {
         reset();
         dispatch(closeModal());
-
-        const params = new URLSearchParams(location.search);
-        if (params.has('auth')) {
-            params.delete('auth');
-            navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
-        } else {
-            navigate(goBackRef.current, { replace: true });
-        }
-    }, [dispatch, reset, location.pathname, location.search, navigate]);
-
-    useEffect(() => {
-        if (!mode) return;
-        
-        previouslyFocused.current = document.activeElement;
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => dialogRef.current?.querySelector('input').focus(), 0);
-
-        const onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                onClose();
-            }
-            if (e.key === 'Tab') {
-                const focusedEl = dialogRef.current.querySelectorAll(
-                    'button, input'
-                );
-                const first = focusedEl[0];
-                const last = focusedEl[focusedEl.length - 1];
-                if (!e.shiftKey && document.activeElement === last) {
-                    e.preventDefault();
-                    first.focus();
-                } else if (e.shiftKey && document.activeElement === first) {
-                    e.preventDefault();
-                    last.focus();
-                }
-            }
-        };
-        document.addEventListener('keydown', onKeyDown);
-
-        return () => {
-            document.removeEventListener('keydown', onKeyDown);
-            document.body.style.overflow = '';
-            previouslyFocused.current.focus();
-        };
-    }, [mode, onClose])
-
-    if (!mode) return null;
-
-    const onBackdrop = (e) => {
-        if (e.target === e.currentTarget) onClose();
-    };
+    }, [dispatch, reset]);
+    
+    if (!isOpen) return null;
 
     const onSubmit = async (data) => {
         try {
@@ -123,7 +70,7 @@ export function AuthModal() {
                 await dispatch(registerUser({ displayName: data.name, email: data.email, password: data.password })).unwrap();
                 toast("Your account has been successfully created")
             }
-            onClose();
+            baseClose();
             
         } catch (err) {
             console.error(err);
@@ -132,67 +79,52 @@ export function AuthModal() {
     }
 
     return (
-        <div
-            className={s.backdrop}
-            onClick={onBackdrop}
+        <ModalWrap
+            isOpen={isOpen}
+            onBaseClose={baseClose}
+            title={mode === "register" ? "Registration" : "Log in"}
+            description={mode === "register"
+                ? "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information"
+                : "Welcome back! Please enter your credentials to access your account and continue your search for an teacher."
+            }
+            queryKey="auth"
         >
-            
-            <div
-                className={s.modal}
-                ref={dialogRef}
-                aria-modal="true"
+            <Toaster />
+            <form
+                className={s.modal_form}
+                onSubmit={handleSubmit(onSubmit)}
             >
-                <button onClick={onClose} >
-                    <IoMdClose className={s.closeBtn} />
-                </button>
-                
-                <h2 className={s.modal_title}>
-                    {mode === 'register' ? 'Registration' : 'Log In'}
-                </h2>
-                <p className={s.modal_text}>
-                    {mode === 'register' ?
-                        'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information' :
-                        'Welcome back! Please enter your credentials to access your account and continue your search for an teacher.'}
-                </p>
-
-                <Toaster />
-                <form
-                    className={s.modal_form}
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    {mode === 'register' && (
-                        <>
-                            <input
-                                className={s.modal_form_input}
-                                type="text"
-                                placeholder="Name"
-                                aria-invalid={!!errors.name}
-                                {...register("name")}
-                            />
-                            {errors.name && <p className={s.err}>{errors.name.message}</p>}
-                        </>
-                        
-                    )}
-                    <input className={s.modal_form_input} type="email" placeholder="Email" {...register("email")} />
-                    {errors.email && <p className={s.err}>{errors.email.message}</p>}
-                    <div className={s.modal_form_input_wrap}>
-                        <input className={s.modal_form_input} type={showPwd ? "text" : "password"} placeholder="Password" {...register("password")} />
-                        <div className={s.modal_form_toggle}>
-                            <VisiblePassword visible={showPwd} onToggle={() => setShowPwd(v => !v)} />
-                        </div>
-                    </div>
+                {mode === 'register' && (
+                    <>
+                        <input
+                            className={s.modal_form_input}
+                            type="text"
+                            placeholder="Name"
+                            aria-invalid={!!errors.name}
+                            {...register("name")}
+                        />
+                        {errors.name && <p className={s.err}>{errors.name.message}</p>}
+                    </>
                     
-                    {errors.password && <p className={s.err}>{errors.password.message}</p>}
-                    <button
-                        className={s.modal_form_btn}
-                        type="submit"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
-                    </button>
-                </form>
-            </div>
-        </div>
-        
+                )}
+                <input className={s.modal_form_input} type="email" placeholder="Email" {...register("email")} />
+                {errors.email && <p className={s.err}>{errors.email.message}</p>}
+                <div className={s.modal_form_input_wrap}>
+                    <input className={s.modal_form_input} type={showPwd ? "text" : "password"} placeholder="Password" {...register("password")} />
+                    <div className={s.modal_form_toggle}>
+                        <VisiblePassword visible={showPwd} onToggle={() => setShowPwd(v => !v)} />
+                    </div>
+                </div>
+                
+                {errors.password && <p className={s.err}>{errors.password.message}</p>}
+                <button
+                    className={s.modal_form_btn}
+                    type="submit"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
+                </button>
+            </form>
+        </ModalWrap>
     )
 }
