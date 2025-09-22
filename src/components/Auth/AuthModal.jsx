@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch} from "react-redux"
 import { useCallback,  useMemo, useState } from "react";
 
 import * as Yup from 'yup';
@@ -8,8 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { ModalWrap } from "../../ui/ModalWrap/ModalWrap";
 import { loginUser, registerUser } from "../../redux/auth/operations";
-import { selectAuthModal } from "../../redux/modal/selectors";
-import { closeModal } from "../../redux/modal/slice";
+
 import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 import s from './AuthModal.module.css';
@@ -38,10 +37,8 @@ const validationLoginSchema = Yup.object().shape({
         .required('Password is required'),
 });
 
-export function AuthModal() {
+export function AuthModal({ mode='login' }) {
     const dispatch = useDispatch();
-
-    const mode = useSelector(selectAuthModal);
 
     const isOpen = !!mode;
     
@@ -58,10 +55,7 @@ export function AuthModal() {
 
     const baseClose = useCallback(() => {
         reset();
-        dispatch(closeModal());
-    }, [dispatch, reset]);
-    
-    if (!isOpen) return null;
+    }, [reset]);
 
     const onSubmit = async (data) => {
         try {
@@ -88,7 +82,6 @@ export function AuthModal() {
                 ? "Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information"
                 : "Welcome back! Please enter your credentials to access your account and continue your search for an teacher."
             }
-            queryKey="auth"
         >
             <Toaster />
             <form

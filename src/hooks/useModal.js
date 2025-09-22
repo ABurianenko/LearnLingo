@@ -9,11 +9,13 @@ export function useModal({ isOpen, onBaseClose, dialogRef, queryKey }) {
 
     const onClose = useCallback(() => {
         onBaseClose?.();
-        if (!queryKey) return;
+
         const params = new URLSearchParams(location.search);
-        if (params.has(queryKey) || params.get(queryKey)) {
+
+        if (queryKey && (params.has(queryKey) || params.get(queryKey))) {
             params.delete(queryKey);
             navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
+            return;
         } else {
             navigate(goBackRef.current, { replace: true });
         }

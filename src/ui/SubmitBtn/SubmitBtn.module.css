@@ -1,6 +1,7 @@
 .modal_form_btn {
     display: flex;
     justify-content: center;
+    margin-top: 40px;
     padding: 16px;
     width: 100%;
 

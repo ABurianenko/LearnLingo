@@ -42,8 +42,8 @@ function App() {
             <PrivateRoute redirectTo='/login' component={<Favorites />} />
           } />
 
-          <Route path="/register" element={<AuthModal />} />
-          <Route path="/login" element={<AuthModal />} />
+          <Route path="/register" element={<AuthModal mode="register" />} />
+          <Route path="/login" element={<AuthModal mode="login" />} />
 
           <Route path="*" element={<Home />} />
 
