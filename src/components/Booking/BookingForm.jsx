@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ModalWrap } from '../../ui/ModalWrap/ModalWrap';
 
 import s from './BookingForm.module.css'
+import { SubmitBtn } from '../../ui/SubmitBtn/SubmitBtn';
 
 const validationBookingSchema = Yup.object().shape({
     reason: Yup.string().required('Select a reason'),
@@ -60,6 +61,7 @@ export function BookingForm() {
 
     return (
         <ModalWrap
+            className={s.booking_modal}
             isOpen={isOpen}
             onBaseClose={baseClose}
             title="Book trial lesson"
@@ -80,18 +82,22 @@ export function BookingForm() {
                 <h3 className={s.reason_title}>
                     What is your main reason for learning English?
                 </h3>
-                <div>
-                    <label>
+                <div className={s.reason_list}>
+                    <label className={s.reason_item} htmlFor="reason-career">
                         <input
+                            id="reason-career"
                             type="radio"
                             name="reason"
+                            className={s.custom_radio}
                             value="career and business"
                             {...register("reason")}
                         />
                         Career and business
                     </label>
-                    <label>
+                    <label className={s.reason_item} htmlFor="reason-kids">
                         <input
+                            id='reason-kids'
+                            className={s.custom_radio}
                             type="radio"
                             name="reason"
                             value="lesson for kids"
@@ -99,8 +105,10 @@ export function BookingForm() {
                         />
                         Lesson for kids
                     </label>
-                    <label>
+                    <label className={s.reason_item} htmlFor="reason-living-abroad">
                         <input
+                            id='reason-living-abroad'
+                            className={s.custom_radio}
                             type="radio"
                             name="reason"
                             value="living abroad"
@@ -108,17 +116,23 @@ export function BookingForm() {
                         />
                         Living abroad
                     </label>
-                    <label>
+                    
+                    <label className={s.reason_item} htmlFor="reason-exams">
                         <input
                             type="radio"
+                            id="reason-exams"
+                            className={s.custom_radio}
                             name="reason"
                             value="exams and coursework"
                             {...register("reason")}
                         />
                         Exams and coursework
                     </label>
-                    <label>
+                    
+                    <label className={s.reason_item} htmlFor="reason-travel">
                         <input
+                            id='reason-travel'
+                            className={s.custom_radio}
                             type="radio"
                             name="reason"
                             value="culture, travel or hobby"
@@ -127,34 +141,39 @@ export function BookingForm() {
                         Culture, travel or hobby
                     </label>
                 </div>
+                <div className={s.modal_form}>
+                    <input
+                        className={s.modal_form_input}
+                        type="text"
+                        placeholder='Full name'
+                        aria-invalid={!!errors.name}
+                        {...register("name")}
+                    />
+                    {errors.name && <p>{errors.name.message}</p>}
+
+                    <input
+                        className={s.modal_form_input}
+                        type="email"
+                        placeholder='Email'
+                        aria-invalid={!!errors.email}
+                        {...register("email")}
+                    />
+                    {errors.email && <p>{errors.email.message}</p>}
+
+                    <input
+                        className={s.modal_form_input}
+                        type="tel"
+                        placeholder='Phone number'
+                        aria-invalid={!!errors.phone}
+                        {...register("phone")}
+                    />
+                    {errors.phone && <p>{errors.phone.message}</p>}
+                </div>
                 
-                <input
-                    type="text"
-                    placeholder='Full name'
-                    aria-invalid={!!errors.name}
-                    {...register("name")}
-                />
-                {errors.name && <p>{errors.name.message}</p>}
 
-                <input
-                    type="email"
-                    placeholder='Email'
-                    aria-invalid={!!errors.email}
-                    {...register("email")}
-                />
-                {errors.email && <p>{errors.email.message}</p>}
-
-                <input
-                    type="tel"
-                    placeholder='Phone number'
-                    aria-invalid={!!errors.phone}
-                    {...register("phone")}
-                />
-                {errors.phone && <p>{errors.phone.message}</p>}
-
-                <button type="submit" disabled={isSubmitting}>
+                <SubmitBtn>
                     {isSubmitting ? 'Booking…' : 'Book'}
-                </button>
+                </SubmitBtn>
 
             </form>
         </ModalWrap>

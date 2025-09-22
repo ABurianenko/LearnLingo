@@ -9,7 +9,8 @@ export function ModalWrap({
     title,
     description,
     queryKey,
-    children
+    children,
+    className 
 }) {
     const dialogRef = useRef(null);
     const { onClose, onBackdrop } = useModal({
@@ -21,8 +22,8 @@ export function ModalWrap({
 
     if (!isOpen) return null;
 
-    return (
-    <div className={s.backdrop} onClick={onBackdrop} role="presentation">
+  return (
+    <div className={className ? `${s.backdrop} ${className}` : s.backdrop} onClick={onBackdrop} role="presentation">
       <div
         className={s.modal}
         ref={dialogRef}

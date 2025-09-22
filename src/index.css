@@ -4,16 +4,22 @@
   padding: 0;
 }
 
+body {
+  background-color: #fff;
+}
+
 #root {
   width: 1440px;
   max-height: 100vh;
   margin: 0 auto;
   padding: 20px 64px 32px 64px;
-  background-color: #fff;
+  
 
   font-family: Roboto, sans-serif;
   color: #121417;
   line-height: 1.5;
+
+  --header-h: 100px;
 }
 
 img {
@@ -34,7 +40,7 @@ a {
   color: inherit;
 }
 
-#root.container {
+body.container {
   background-color: #F8F8F8;
   max-height: 100%;
 }

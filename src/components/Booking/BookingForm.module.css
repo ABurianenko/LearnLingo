@@ -1,10 +1,18 @@
+.booking_modal {
+    background-color: #F8F8F8;
+    top: 88px;
+}
+
 .teacher {
     display: grid;
     grid-template-columns: 44px auto;
     grid-template-areas: 
     "photo text"
     "photo name";
-    gap: 4px 14px;
+    gap: 0 14px;
+
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .teacher_photo {
@@ -37,4 +45,65 @@
     font-size: 24px;
     font-weight: 500;
     line-height: 1.33;
+
+    margin-bottom: 20px;
+}
+
+.reason_list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.reason_item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+
+.custom_radio {
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: 2px solid rgba(18, 20, 23, 0.2);
+    background-color: #fff;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.custom_radio:checked {
+    border-color: var(--main-color);
+    background:
+        radial-gradient(circle at center, var(--main-color) 50%, transparent 51%);
+    box-shadow: 0 0 0 0.3px var(--main-color);
+}
+
+.modal_form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.modal_form_input {
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(18, 20, 23, 0.10);
+
+    color: #121417;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.38;
 }

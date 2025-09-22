@@ -13,6 +13,7 @@ import { closeModal } from "../../redux/modal/slice";
 import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 import s from './AuthModal.module.css';
+import { SubmitBtn } from "../../ui/SubmitBtn/SubmitBtn";
 
 
 const validationRegisterSchema = Yup.object().shape({
@@ -117,13 +118,10 @@ export function AuthModal() {
                 </div>
                 
                 {errors.password && <p className={s.err}>{errors.password.message}</p>}
-                <button
-                    className={s.modal_form_btn}
-                    type="submit"
-                    disabled={isSubmitting}
+                <SubmitBtn
                 >
                     {isSubmitting ? 'Submitting...' : mode === 'login' ? 'Log in' : 'Sign up'}
-                </button>
+                </SubmitBtn>
             </form>
         </ModalWrap>
     )
