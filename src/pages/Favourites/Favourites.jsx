@@ -26,8 +26,11 @@ export const Favorites = () => {
     if (favKeys.length === 0) return <p>No favorites yet.</p>;
 
     return (
-        <ul>
-        {list.map(t => <TeacherCard key={makeTeacherKey(t)} teacher={t} />)}
-        </ul>
+        <div className="container">
+            <ul>
+                {list.map(t => <TeacherCard key={makeTeacherKey(t)} teacher={t} />)}
+            </ul>
+        </div>
+        
     );
 };

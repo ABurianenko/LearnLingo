@@ -13,6 +13,7 @@ import { VisiblePassword } from "../../ui/VisiblePassword/VisiblePassword";
 
 import s from './AuthModal.module.css';
 import { SubmitBtn } from "../../ui/SubmitBtn/SubmitBtn";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const validationRegisterSchema = Yup.object().shape({
@@ -39,6 +40,9 @@ const validationLoginSchema = Yup.object().shape({
 
 export function AuthModal({ mode='login' }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || '/';
 
     const isOpen = !!mode;
     
@@ -66,6 +70,7 @@ export function AuthModal({ mode='login' }) {
                 toast("Your account has been successfully created")
             }
             baseClose();
+            navigate(from, { replace: true });
             
         } catch (err) {
             console.error(err);
@@ -75,6 +80,7 @@ export function AuthModal({ mode='login' }) {
 
     return (
         <ModalWrap
+            className={s.auth_modal}
             isOpen={isOpen}
             onBaseClose={baseClose}
             title={mode === "register" ? "Registration" : "Log in"}
