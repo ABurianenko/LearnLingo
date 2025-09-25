@@ -6,6 +6,8 @@ import { fetchTeachers } from "../../redux/teachers/operations";
 import { makeTeacherKey } from "../../utils/teacherKey";
 import { TeacherCard } from "../../components/TeacherCard/TeacherCard";
 
+import s from '../../components/TeacherList/TeacherList.module.css'
+
 export const Favorites = () => {
     const dispatch = useDispatch();
     const favKeys = useSelector(selectFavoriteKeys);
@@ -17,6 +19,11 @@ export const Favorites = () => {
         }
     }, [dispatch, teachers]);
 
+    // useEffect(() => {
+    //     document.body.classList.add('container');
+    //     return () => document.body.classList.remove('container');
+    // }, []);
+
     const list = useMemo(() => {
         if (!Array.isArray(teachers)) return [];
         const set = new Set(favKeys);
@@ -26,8 +33,8 @@ export const Favorites = () => {
     if (favKeys.length === 0) return <p>No favorites yet.</p>;
 
     return (
-        <div className="container">
-            <ul>
+        <div>
+            <ul className={s.teacherList}>
                 {list.map(t => <TeacherCard key={makeTeacherKey(t)} teacher={t} />)}
             </ul>
         </div>

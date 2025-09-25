@@ -1,8 +1,12 @@
 header {
     display: flex;
-    margin: 0 64px 20px 64px;
+    padding: 20px 64px 20px 64px;
     align-items: center;
     justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 1100;
 }
 
 .logo {

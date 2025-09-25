@@ -1,6 +1,6 @@
 .booking_modal {
-    background-color: #F8F8F8;
-    top: 88px;
+    background-color: #f8f8f8;
+    inset: var(--header-h) 0 0 0;
 }
 
 .teacher {

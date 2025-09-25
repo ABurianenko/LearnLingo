@@ -32,13 +32,13 @@ export const Teachers = () => {
         }
     }, [page])
 
-    useEffect(() => {
-        document.body.classList.add('container');
-        return () => document.body.classList.remove('container');
-    }, []);
+    // useEffect(() => {
+    //     document.body.classList.add('container');
+    //     return () => document.body.classList.remove('container');
+    // }, []);
 
     return (
-        <div className="container">
+        <div>
             {isLoading && <p>Loading...</p>}
             {error && <p>Failed to load teachers</p>}
             <TeacherList />

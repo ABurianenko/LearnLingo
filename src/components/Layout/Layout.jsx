@@ -6,14 +6,18 @@ export const Layout = ({ children }) => {
     const { pathname } = useLocation();
 
     useEffect(() => {
-        const root = document.getElementById('root');
-        const onTeachers = pathname.startsWith('/teachers');
-        root.classList.toggle('container', onTeachers);
+        const html = document.documentElement;
+        const useMutedBg = (
+            pathname.startsWith('/teachers') ||
+            pathname.startsWith('/favorites')
+        );
+        html.setAttribute('data-page', useMutedBg ? 'muted' : 'default'
+        )
     }, [pathname]);
 
     return (
         <>
-            <Header />
+            <Header className="header" />
             <main>
                 <Suspense>{children}</Suspense>
             </main>
