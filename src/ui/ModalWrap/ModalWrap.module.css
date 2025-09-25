@@ -1,20 +1,27 @@
 .backdrop {
     width: 100%;
     position: fixed;
-    inset: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: var(--header-h);
+
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #fff;
+    padding: var(--gap);
+
 }
 
 .modal {
+    z-index: 1200;
     position: relative;
     background-color: #fff;
 
-    max-width: 566px;
-    max-height: calc(100dvh - 32px);
+    width: min(var(--modal-max-w), calc(100vw - 2*var(--gap)));
+    max-height: calc(100dvh - var(--header-h) - 2*var(--gap));
     overflow: auto;
     padding: 64px;
 
@@ -31,6 +38,8 @@
 
     border: none;
     background-color: transparent;
+
+    cursor: pointer;
 }
 
 .closeBtn>svg {

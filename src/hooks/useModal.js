@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 export function useModal({ isOpen, onBaseClose, dialogRef, queryKey }) {
     const location = useLocation();
     const navigate = useNavigate();
-    const goBackRef = useRef(location.state?.from || "/");
+    // const goBackRef = useRef(location.state?.from || "/");
     const previouslyFocused = useRef(null);
 
     const onClose = useCallback(() => {
@@ -12,14 +12,19 @@ export function useModal({ isOpen, onBaseClose, dialogRef, queryKey }) {
 
         const params = new URLSearchParams(location.search);
 
-        if (queryKey && (params.has(queryKey) || params.get(queryKey))) {
+        if (queryKey && params.has(queryKey)) {
             params.delete(queryKey);
             navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
             return;
-        } else {
-            navigate(goBackRef.current, { replace: true });
+            }
+
+        if (location.state?.from) {
+            navigate(location.state.from, { replace: true });
+            return;
         }
-    }, [onBaseClose, location.pathname, location.search, navigate, queryKey]);
+
+        navigate(-1);
+    }, [onBaseClose, location.pathname, location.search, navigate, queryKey, location.state]);
 
     useEffect(() => {
         if (!isOpen) return;

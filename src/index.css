@@ -15,6 +15,8 @@ body {
 :root {
   --header-h: 88px;
   --page-bg: #fff;
+  --gap: 16px;
+  --modal-max-w: 566px;
 }
 
 #root {
@@ -54,6 +56,15 @@ a {
 
 .header {
   background-color: var(--page-bg);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus,
+button:hover {
+  filter: brightness(0.9);
 }
 
 [data-page='muted'] {
