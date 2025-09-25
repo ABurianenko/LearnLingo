@@ -10,7 +10,10 @@ export const TeacherList = () => {
     return (
         <ul className={s.teacherList}>
             {teachers.map((teacher, i) => (
-                <TeacherCard key={i} teacher={teacher} />
+                <li key={`${teacher.name}_${teacher.surname}`} data-teacher-idx={i}>
+                    <TeacherCard teacher={teacher} />
+                </li>
+                
             ))}
         </ul>
     )

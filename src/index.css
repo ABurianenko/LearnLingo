@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scroll-padding-top: var(--header-h);
+}
+
 body {
   background-color: var(--page-bg);
 }
@@ -18,7 +22,6 @@ body {
   max-height: 100vh;
   margin: 0 auto;
   padding: 0 64px 32px 64px;
-  
 
   font-family: Roboto, sans-serif;
   color: #121417;

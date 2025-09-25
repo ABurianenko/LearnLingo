@@ -14,12 +14,16 @@ export const Teachers = () => {
     const page = useSelector(SelectPages);
     const limit = Number(useSelector(SelectLimit));
     const totalPages = useSelector(SelectTotalPages);
+    const teachers = useSelector(SelectTeachers);
+
+    const prevCountRef = useRef(0);
 
     const LoadMoreButtonRef = useRef(null);
-    const prevPageRef = useRef(page);
 
     const handlePageChange = (newPage) => {
-        dispatch(fetchTeachers({page: newPage, limit}))
+        if (newPage <= totalPages) {
+            dispatch(fetchTeachers({page: newPage, limit}))
+        } 
     }
 
     useEffect(() => {
@@ -27,15 +31,19 @@ export const Teachers = () => {
     }, [dispatch, limit]);
 
     useEffect(() => {
-        if (prevPageRef.current !== page && page !== 1 && LoadMoreButtonRef.current) {
-            LoadMoreButtonRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})
-        }
-    }, [page])
+        const prevCount = prevCountRef.current;
+    const nextCount = teachers.length;
 
-    // useEffect(() => {
-    //     document.body.classList.add('container');
-    //     return () => document.body.classList.remove('container');
-    // }, []);
+    if (nextCount > prevCount && prevCount > 0) {
+      const target = document.querySelector(`[data-teacher-idx="${prevCount}"]`);
+      if (target) {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+    prevCountRef.current = nextCount;
+  }, [teachers.length]);
 
     return (
         <div>

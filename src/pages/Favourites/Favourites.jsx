@@ -19,11 +19,6 @@ export const Favorites = () => {
         }
     }, [dispatch, teachers]);
 
-    // useEffect(() => {
-    //     document.body.classList.add('container');
-    //     return () => document.body.classList.remove('container');
-    // }, []);
-
     const list = useMemo(() => {
         if (!Array.isArray(teachers)) return [];
         const set = new Set(favKeys);

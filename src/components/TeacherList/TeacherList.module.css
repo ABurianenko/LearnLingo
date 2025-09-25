@@ -6,3 +6,7 @@
     margin-left: 64px;
     margin-right: 64px;
 }
+
+.teacherList>li {
+    scroll-margin-top: var(--header-h);
+}
