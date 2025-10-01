@@ -3,6 +3,7 @@ import { SelectLimit, SelectPages, SelectTeachers, SelectTotalPages, TeachersErr
 import { useEffect, useRef } from "react";
 import { fetchTeachers } from "../../redux/teachers/operations";
 import { TeacherList } from "../../components/TeacherList/TeacherList";
+import { TeacherFilters } from "../../components/TeacherFilters/TeacherFilters";
 
 import s from './Teachers.module.css'
 
@@ -43,12 +44,14 @@ export const Teachers = () => {
       }
     }
     prevCountRef.current = nextCount;
-  }, [teachers.length]);
+    }, [teachers.length]);
+    
 
     return (
         <div>
             {isLoading && <p>Loading...</p>}
             {error && <p>Failed to load teachers</p>}
+            <TeacherFilters />
             <TeacherList />
             <div style={{display:'flex', justifyContent:'center'}}>
                 <button

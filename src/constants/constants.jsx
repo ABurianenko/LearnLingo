@@ -10,3 +10,11 @@ export const pickRandomTheme = (exclude) => {
 
 export const isTheme = (x) => typeof x === 'string' && THEMES.includes(x);
 
+export const LEVELS = [
+  'A1 Beginner',
+  'A2 Elementary',
+  'B1 Intermediate',
+  'B2 Upper-Intermediate',
+  'C1 Advanced',
+  'C2 Proficient'
+]

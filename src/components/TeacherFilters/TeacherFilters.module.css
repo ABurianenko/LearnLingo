@@ -1,0 +1,81 @@
+.filters_container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+    margin-left: 64px;
+}
+
+.filter_label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.filter_name {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.29;
+    color: #8A8A89;
+}
+
+.filter_selector {
+    padding: 14px;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.11;
+
+    border-radius: 14px;
+    background: #FFF;
+    border: none;
+
+    cursor: pointer;
+    outline: none;
+
+    appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+}
+
+.filter_selector:hover,
+.filter_selector:focus {
+    border-color: var(--bg-color);
+}
+
+.filter_selector option[disabled],
+.filter_selector option[value=""] {
+    color: #B0B0B0;
+}
+
+.filter_selector option[disabled] {
+    display: none;
+}
+
+.filter_label::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>') center/contain no-repeat;
+    background: #121417;
+}
+
+.filter_option {
+    padding: 14px auto 14px 18px;
+
+    border: none;
+    background-color: none;
+}
+
+@supports selector(select:focus-visible) {
+    .filter_selector:focus-visible {
+        outline: none;
+    }
+}

@@ -1,7 +1,6 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { makeTeacherKey } from "../utils/teacherKey";
 import { firestore } from "./config";
-import { serverTimestamp } from "firebase/database";
 
 export async function createBooking({ form, teacher, user }) {
     const teacherKey = makeTeacherKey?.(teacher) ?? null;

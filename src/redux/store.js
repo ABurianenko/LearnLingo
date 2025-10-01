@@ -5,6 +5,8 @@ import { modalReducer } from "./modal/slice";
 import { teacherReducer } from "./teachers/slice";
 import { favoritesReducer } from "./favorites/slice";
 import { THEME_STORAGE_KEY } from "../constants/constants";
+import { filtersReducer } from "./filters/slice";
+import { languagesReducer } from "./languages/slice";
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +15,8 @@ export const store = configureStore({
         modal: modalReducer,
         auth: authReducer,
         theme: themeReducer,
+        filters: filtersReducer,
+        languages: languagesReducer,
     }
 })
 
