@@ -20,7 +20,8 @@
     color: #8A8A89;
 }
 
-.filter_selector {
+select {
+    width: 220px;
     padding: 14px;
 
     font-size: 18px;
@@ -40,42 +41,58 @@
         -moz-appearance: none;
 }
 
-.filter_selector:hover,
-.filter_selector:focus {
-    border-color: var(--bg-color);
+select,
+::picker(select) {
+    appearance: base-select;
 }
 
-.filter_selector option[disabled],
-.filter_selector option[value=""] {
-    color: #B0B0B0;
+::picker(select) {
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0px 12.8px 28.8px rgba(0, 0, 0, 0.13), 0px 0px 9.2px rgba(0, 0, 0, 0.11);
+    border: none;
+    margin-block-start: 0.5rem;
+    padding: 14px;
 }
 
-.filter_selector option[disabled] {
+option::checkmark,
+select::picker-icon {
     display: none;
 }
 
-.filter_label::after {
-    content: "";
-    position: absolute;
-    right: 12px;
-    top: calc(50% + 10px);
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    pointer-events: none;
-    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>') center/contain no-repeat;
-    background: #121417;
-}
+option {
+    padding: 4px;
+    color: rgba(18, 20, 23, 0.20);;
 
-.filter_option {
-    padding: 14px auto 14px 18px;
-
-    border: none;
-    background-color: none;
-}
-
-@supports selector(select:focus-visible) {
-    .filter_selector:focus-visible {
-        outline: none;
+    &:hover,
+    &:active {
+        color: #121417;
+        background-color: transparent;
     }
+}
+
+button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow {
+    align-self: center;
+    transition: rotate 0.25s;
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='Layer_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 66.49 42.37'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23221f20; stroke-width: 0px; %7D %3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M3.96,0h58.57c3.37,0,5.2,3.95,3.01,6.52l-29.28,34.46c-1.58,1.86-4.45,1.86-6.03,0L.95,6.52C-1.23,3.95.59,0,3.96,0Z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(4);
+    width: 0.5rem;
+    height: 0.5rem;
+
+    .filter_selector:open & {
+        rotate: x 180deg;
+    }
+}
+
+[hidden] {
+    display: none;
 }

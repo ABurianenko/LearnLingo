@@ -42,12 +42,15 @@ export const TeacherFilters = () => {
                     <label className={s.filter_label}>
                         <p className={s.filter_name}>Languages</p>
                         <Field as="select" name="language" className={s.filter_selector}>
-                            <option value="" disabled hidden>
-                                Choose a language
-                            </option>
+                            <button>
+                                <selectedcontent>Choose a language</selectedcontent>
+                                <span className={s.arrow}></span>
+                            </button>
                             {languages.map((language, id) => (
                                 <option key={id} value={language} className={s.filter_option}>
-                                    {language}
+                                    <div className={s.filter_option_name}>
+                                        {language}
+                                    </div>
                                 </option>
                             ))}
                         </Field>
@@ -55,12 +58,15 @@ export const TeacherFilters = () => {
                     <label className={s.filter_label}>
                         <p className={s.filter_name}>Level of knowledge</p>
                         <Field as="select" name="level" className={s.filter_selector}>
-                            <option value="" disabled hidden>
-                                Choose a level
-                            </option>
+                            <button>
+                                <selectedcontent>Choose a level</selectedcontent>
+                                <span className={s.arrow}></span>
+                            </button>
                             {levels.map((level, id) => (
                                 <option key={id} value={level} className={s.filter_option}>
-                                    {level}
+                                    <div className={s.filter_option_name}>
+                                        {level}
+                                    </div>
                                 </option>
                             ))}
                         </Field>
