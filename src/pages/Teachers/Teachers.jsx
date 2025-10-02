@@ -6,6 +6,7 @@ import { TeacherList } from "../../components/TeacherList/TeacherList";
 import { TeacherFilters } from "../../components/TeacherFilters/TeacherFilters";
 
 import s from './Teachers.module.css'
+import { selectFilters } from "../../redux/filters/selectors";
 
 export const Teachers = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const Teachers = () => {
     const limit = Number(useSelector(SelectLimit));
     const totalPages = useSelector(SelectTotalPages);
     const teachers = useSelector(SelectTeachers);
+    const filters = useSelector(selectFilters)
 
     const prevCountRef = useRef(0);
 
@@ -26,10 +28,10 @@ export const Teachers = () => {
             dispatch(fetchTeachers({page: newPage, limit}))
         } 
     }
-
+    
     useEffect(() => {
         dispatch(fetchTeachers({ page: 1, limit }));
-    }, [dispatch, limit]);
+    }, [dispatch, limit, filters.language, filters.level]);
 
     useEffect(() => {
         const prevCount = prevCountRef.current;

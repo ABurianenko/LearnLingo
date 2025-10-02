@@ -3,6 +3,7 @@
     gap: 20px;
     margin-bottom: 32px;
     margin-left: 64px;
+    align-items: end;
 }
 
 .filter_label {
@@ -13,6 +14,7 @@
 }
 
 .filter_name {
+    margin-left: 8px;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -71,7 +73,7 @@ option {
     }
 }
 
-button {
+.filter_selector_button {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -95,4 +97,17 @@ button {
 
 [hidden] {
     display: none;
+}
+
+.clear_btn {
+    width: auto;
+    padding: 10px 60px;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--main-color);
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.56;
 }
