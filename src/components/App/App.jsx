@@ -12,6 +12,7 @@ import { Teachers } from "../../pages/Teachers/Teachers"
 import { Favorites } from "../../pages/Favourites/Favourites"
 import { BookingForm } from "../Booking/BookingForm"
 import { AuthRequiredModal } from "../Auth/AuthRequiredModal"
+import { Toaster } from "react-hot-toast"
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +52,19 @@ function App() {
         </Routes>
         <BookingForm />
         <AuthRequiredModal />
+        <Toaster
+          containerStyle={{
+            top: '20%'
+          }}
+          toastOptions={{
+            style: {
+              width: '600px',
+              boxShadow: '1px 2px 309px 46px rgba(0,0,0,0.59)',
+              WebkitBoxShadow: '1px 2px 309px 46px rgba(0,0,0,0.59)',
+              MozBoxShadow: '1px 2px 309px 46px rgba(0,0,0,0.59)',
+            }
+          }}
+        />
       </Layout>
     </div>
   )

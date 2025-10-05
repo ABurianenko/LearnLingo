@@ -50,8 +50,12 @@ export function BookingForm() {
 
     const onSubmit = async (data) => {
         try {
-            await createBooking({ form: data, teacher, user });
-            toast.success("BOOKING CONFIRMED. Soon you will receive an email confirming your booking details");
+            await toast.promise(
+                createBooking({ form: data, teacher, user }),
+                {
+                    success: "BOOKING CONFIRMED. Soon you will receive an email confirming your booking details"
+                }
+            )
             baseClose();
         } catch (error) {
             console.error(error);

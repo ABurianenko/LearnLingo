@@ -7,6 +7,7 @@ import { TeacherFilters } from "../../components/TeacherFilters/TeacherFilters";
 
 import s from './Teachers.module.css'
 import { selectFilters } from "../../redux/filters/selectors";
+import Skeleton from "../../ui/Skeleton/Skeleton";
 
 export const Teachers = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,9 @@ export const Teachers = () => {
     const limit = Number(useSelector(SelectLimit));
     const totalPages = useSelector(SelectTotalPages);
     const teachers = useSelector(SelectTeachers);
-    const filters = useSelector(selectFilters)
+    const filters = useSelector(selectFilters);
+
+    const isInitialLoading = isLoading && page === 1 && teachers.length === 0;
 
     const prevCountRef = useRef(0);
 
@@ -51,20 +54,36 @@ export const Teachers = () => {
 
     return (
         <div>
-            {isLoading && <p>Loading...</p>}
+            
             {error && <p>Failed to load teachers</p>}
-            <TeacherFilters />
-            <TeacherList />
-            <div style={{display:'flex', justifyContent:'center'}}>
-                <button
-                    className={s.loadMore_btn}
-                    ref={LoadMoreButtonRef}
-                    onClick={() => handlePageChange(page+1)}
-                    disabled={page>=totalPages}
-                >
-                    Load more
-                </button>
-            </div>
+            
+            {isInitialLoading ? (
+                <>
+                    <div className={s.filters_container}>
+                        <Skeleton className={s.skeleton_filter} />
+                        <Skeleton className={s.skeleton_filter} />
+                    </div>
+                    <Skeleton className={s.skeleton_card} />
+                    <Skeleton className={s.skeleton_card} />
+                </>
+            ) : (
+                <>
+                    <TeacherFilters />
+                    <TeacherList />
+                    <div style={{display:'flex', justifyContent:'center'}}>
+                        <button
+                            className={s.loadMore_btn}
+                            ref={LoadMoreButtonRef}
+                            onClick={() => handlePageChange(page+1)}
+                            disabled={page>=totalPages}
+                        >
+                            Load more
+                        </button>
+                    </div>
+                </>
+            )}
+            
+            
         </div>
     )
 }

@@ -10,3 +10,25 @@
     font-weight: 700;
     line-height: 1.56;
 }
+
+.skeleton_card {
+    height: 280px;
+
+    margin: 32px 64px;
+
+    border-radius: 24px;
+}
+
+.filters_container {
+    display: flex;
+    gap: 20px;
+    margin-top: 32px;
+    margin-left: 64px;
+    align-items: end;
+}
+
+.skeleton_filter {
+    width: 220px;
+    height: 48px;
+    border-radius: 12px;
+}
